@@ -1,0 +1,49 @@
+public class FinancialForecasting {
+    // Recursive method to calculate future value
+    public static double forecastValue(double currentValue, double growthRate, int years) {
+        // Base case
+        if (years == 0) {
+            return currentValue;
+        }
+        // Recursive case
+        return forecastValue(currentValue * (1 + growthRate), growthRate, years - 1);
+    }
+    // Iterative method (optimized)
+    public static double forecastIterative(double currentValue, double growthRate, int years) {
+        for (int i = 0; i < years; i++) {
+            currentValue *= (1 + growthRate);
+        }
+        return currentValue;
+    }
+
+    public static void main(String[] args) {
+
+        double currentValue = 10000.0;
+        double growthRate = 0.08; // 8%
+        int years = 5;
+
+        // Recursive Forecast
+        double recursiveResult = forecastValue(currentValue, growthRate, years);
+
+        // Iterative Forecast
+        double iterativeResult = forecastIterative(currentValue, growthRate, years);
+
+        // Formula-based Forecast
+        double formulaResult = currentValue * Math.pow(1 + growthRate, years);
+        System.out.println("=== Financial Forecasting ===");
+        System.out.println("Current Value: $" + currentValue);
+        System.out.println("Growth Rate: " + (growthRate * 100) + "%");
+        System.out.println("Years: " + years);
+        System.out.printf("\nRecursive Forecast Value: $%.2f%n", recursiveResult);
+        System.out.printf("Iterative Forecast Value: $%.2f%n", iterativeResult);
+        System.out.printf("Formula Forecast Value: $%.2f%n", formulaResult);
+
+        // Complexity Analysis
+        System.out.println("\nAnalysis:");
+        System.out.println("Recursive Time Complexity: O(n)");
+        System.out.println("Recursive Space Complexity: O(n)");
+        System.out.println("Iterative Time Complexity: O(n)");
+        System.out.println("Iterative Space Complexity: O(1)");
+        System.out.println("Formula Approach: Most Efficient for large values.");
+    }
+}
